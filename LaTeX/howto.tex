@@ -1,0 +1,177 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx,indentfirst}
+\usepackage{amsmath}
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{textgreek}
+\usepackage{ marvosym }
+\usepackage{ scrextend }
+\usepackage{ setspace }
+
+%\usepackage{showframe}
+
+\pagestyle{plain}
+\baselineskip 18pt
+\textwidth 6.5in
+\textheight 7.8in
+\oddsidemargin 0.1in
+\evensidemargin 0.1in
+\topmargin 0.3in
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\reff}[1]{(\ref{#1})}
+\newcommand{\problem}[2]{\vspace{1em} \textbf{#1:} \\ {#2}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\tbs}{\textbackslash{}}
+
+\usepackage{datetime}
+\newdateformat{properdate}{\THEDAY{}\;\monthname[\THEMONTH]{}\;\THEYEAR}
+
+% \problem{Name}{Text}
+% \fbox{ text-to-be-outlined }
+
+\begin{document}
+
+\title{\vspace{-5em}How to \LaTeX}
+\author{George Wong}
+\date{\properdate\today}
+\maketitle
+
+\vspace{1em}
+
+\section{What is \LaTeX?}
+\begin{itemize}
+\item Used in textbooks, journal/conference articles, and lab reports!
+\item You provide the material and \LaTeX\ renders according to typographical conventions \&c.
+\item Not a WYSIWYG editor!
+\item Initial release 1985 by Leslie Lamport -- \underline{La}mport \TeX. \TeX\ originally from Donald Knuth in 1978.\footnote{Knuth says to pronounce his name ``Ka-NOOTH''. See {\tt{}http://www-cs-faculty.stanford.edu/\textasciitilde{}uno/faq.html}}
+\item \TeX\ is an abbreviation of \texttau\'\!\!\!\textepsilon\textchi\textnu\texteta \; or ``art craft''. Thus, it should be pronounced as ``tech'' in \emph{technical}. %\tau\epsilon\chi\nu\eta
+\end{itemize}
+
+\section{\LaTeX\ rendering tools}
+\begin{itemize}
+\item In ye olde days, used the {\tt tex} command from the command line -- produced postscript {\tt .ps} file. Now straight to {\tt .pdf} with many tools!
+\item OSX
+\begin{itemize}
+\item TeXworks
+\item MacTeX
+\end{itemize}
+\item Windows
+\begin{itemize}
+\item MiKTeX
+\end{itemize}
+\item Linux
+\begin{itemize}
+\item Google is your friend! Personally I use {\tt vim} with {\tt pdflatex}.
+\end{itemize}
+\item Alternatively, use an online service like
+\begin{itemize}
+\item https://www.overleaf.com/
+\item https://www.sharelatex.com/
+\end{itemize}
+Some services might even allow you to collaborate (useful for partner lab reports!)
+\end{itemize}
+
+\section{Document structure}
+\LaTeX\ expects a specific structure to your document. Generally, the document is in two parts, a \textbf{preamble} and a \textbf{body}. In the preamble, you tell the renderer what sort of document this is (books look different than journal articles), along with what extra \emph{package}s to include, e.g., Greek or special math characters. The ``meat'' of your document---everything that you want to actually show up---goes in the body.
+
+Here's an example document:
+
+\begin{addmargin}[1em]{0em}
+\begin{verbatim}
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+\section{Section the First}
+Lorem ipsum dolor sit amet, quo autem fugit vivendum eu, mel at 
+lorem homero hendrerit
+\end{document}
+\end{verbatim}
+\end{addmargin}
+
+The first line tells the renderer to treat the document as an \emph{article} and to normalize to 12 pt font. The next two lines are my personal ``always-use'' packages. They provide various math symbols and environments that I find interminably useful.
+
+The rest of the document lies with the {\tt document} environment, enclosed by the {\tt \tbs begin\{$\cdot$\}} and {\tt \tbs end\{$\cdot$\}} tags. [TODO: talk about section/subsection/etc.]
+
+\section{Styling}
+In general, you try to avoid explicitly styling your document as much as possible. The renderer almost definitely knows better than you. Styling font, e.g., adding emphasis, is fine though.
+
+\begin{center}
+\begin{tabular}{l l}
+Product & Code \\
+\hline
+\emph{Your text here!} & {\tt \tbs{}emph\{Your text here!\}} \\
+\textbf{Your text here!} & {\tt \tbs{}textbf\{Your text here!\}} \\
+\underline{Your text here!} & {\tt \tbs{}underline\{Your text here!\}}
+\end{tabular}
+\end{center}
+
+When it's \textbf{\emph{absolutely}} necessary, you can add spaces, carriage returns, and page breaks
+\begin{center}
+\begin{tabular}{l l}
+Effect & Code \\
+\hline
+Narrow space & {\tt \tbs{},} \\
+Em-width space & {\tt \tbs } \;\;followed by space \\
+Wide space & {\tt \tbs{};} \\
+``Backwards'' space & {\tt \tbs{}! }\\
+Single line break / carriage return & {\tt \tbs\tbs} \\
+Four-line break & {\tt \tbs{}vspace\{4em\}} \\
+Page break & {\tt \tbs{}vfill} \\
+Fill extra horizontal space & {\tt \tbs{}hfill}
+\end{tabular}
+\end{center}
+
+You've noticed by now that commands seem to be preceded by the backslash {\tt \tbs} character.\footnote{It's a backslash, not a forward slash. You recognize this by the fact that it's a vertical line falling backwards. URLs on the internet make use of \emph{forward} slashes!} The backslash is called an \emph{escape} character. Using it lets the compiler know that it should treat the following characters a part of a command as opposed to normal text. 
+
+
+\section{Math mode}
+[TODO] words about math mode. Inline vs environments
+\begin{itemize}
+\item \tbs{}usepackage\{amsmath\}
+\item \tbs{}usepackage\{amssymb\}
+\item superscript / subscript
+\item \tbs{}sqrt
+\item \tbs{}int
+\item special sequences \\sin
+\item fractions (frac and dfrac)
+\item \tbs{}mathrm 
+\item \tbs{}mathbb
+\item \tbs{}mathcal
+\item putting spaces in math mode
+\item  - align
+\item - array
+\end{itemize}
+ 
+\section{Detexify}
+This tool deserves its own section
+Detexify {\tt http://detexify.kirelabs.org/}
+
+\section{Lists}
+
+\section{Floats}
+
+\subsection{Tables}
+
+\subsection{Graphics}
+ - tikzpicture
+ 
+\section{Miscellaneous}
+
+\subsection{Comments}
+Use \%
+
+\subsection{How to deal with errors}
+Fix them.
+
+\subsection{Well wishes}
+There's a lot to learn; don't be discouraged! You only need to remember a very small subset of everything in order to produce beautiful documents. Keep templates of useful document classes, look things up (@ Google ``{\tt{}How do I do} X {\tt{}in LaTeX}''), and ask questions when necessary. Learning to write with \LaTeX\ is learning use a new skill. Keep at it and you'll be an expert in no time!
+
+
+
+
+\end{document}

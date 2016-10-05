@@ -4,7 +4,7 @@
 \usepackage{parskip}
 \usepackage{float}
 \usepackage{amssymb}
-\usepackage{textgreek}
+%\usepackage{textgreek}
 \usepackage{ marvosym }
 \usepackage{ scrextend }
 \usepackage{ setspace }
@@ -35,7 +35,7 @@
 \begin{document}
 
 \title{\vspace{-5em}How to \LaTeX}
-\author{George Wong}
+\author{George Wong, David Mykytyn}
 \date{\properdate\today}
 \maketitle
 
@@ -45,9 +45,9 @@
 \begin{itemize}
 \item Used in textbooks, journal/conference articles, and lab reports!
 \item You provide the material and \LaTeX\ renders according to typographical conventions \&c.
-\item Not a WYSIWYG editor!
+\item Not a WYSIWYG (what you see is what you get) editor!
 \item Initial release 1985 by Leslie Lamport -- \underline{La}mport \TeX. \TeX\ originally from Donald Knuth in 1978.\footnote{Knuth says to pronounce his name ``Ka-NOOTH''. See {\tt{}http://www-cs-faculty.stanford.edu/\textasciitilde{}uno/faq.html}}
-\item \TeX\ is an abbreviation of \texttau\'\!\!\!\textepsilon\textchi\textnu\texteta \; or ``art craft''. Thus, it should be pronounced as ``tech'' in \emph{technical}. %\tau\epsilon\chi\nu\eta
+\item \TeX\ should be pronounced as ``tech'' in \emph{technical}. %\tau\epsilon\chi\nu\eta
 \end{itemize}
 
 \section{\LaTeX\ rendering tools}
@@ -64,7 +64,7 @@
 \end{itemize}
 \item Linux
 \begin{itemize}
-\item Google is your friend! Personally I use {\tt vim} with {\tt pdflatex}.
+\item Google is your friend! Personally I use {\tt vim} (but you can use any text editor) with {\tt pdflatex}.
 \end{itemize}
 \item Alternatively, use an online service like
 \begin{itemize}
@@ -95,7 +95,7 @@ lorem homero hendrerit
 
 The first line tells the renderer to treat the document as an \emph{article} and to normalize to 12 pt font. The next two lines are my personal ``always-use'' packages. They provide various math symbols and environments that I find interminably useful.
 
-The rest of the document lies with the {\tt document} environment, enclosed by the {\tt \tbs begin\{$\cdot$\}} and {\tt \tbs end\{$\cdot$\}} tags. [TODO: talk about section/subsection/etc.]
+The rest of the document lies with the {\tt document} environment, enclosed by the {\tt \tbs begin\{$\cdot$\}} and {\tt \tbs end\{$\cdot$\}} tags. You can divide your document into sections, using {\tt \tbs section \{$\cdot$\}} and even {\tt \tbs subsection} and even even {\tt \tbs subsubsection}. \LaTeX will automatically number your sections and subsections for you.
 
 \section{Styling}
 In general, you try to avoid explicitly styling your document as much as possible. The renderer almost definitely knows better than you. Styling font, e.g., adding emphasis, is fine though.
@@ -126,15 +126,15 @@ Fill extra horizontal space & {\tt \tbs{}hfill}
 \end{tabular}
 \end{center}
 
-You've noticed by now that commands seem to be preceded by the backslash {\tt \tbs} character.\footnote{It's a backslash, not a forward slash. You recognize this by the fact that it's a vertical line falling backwards. URLs on the internet make use of \emph{forward} slashes!} The backslash is called an \emph{escape} character. Using it lets the compiler know that it should treat the following characters a part of a command as opposed to normal text. 
+You've noticed by now that commands seem to be preceded by the backslash {\tt \tbs} character. The backslash is called an \emph{escape} character. Using it lets the compiler know that it should treat the following characters a part of a command as opposed to normal text. 
 
 
 \section{Math mode}
-[TODO] words about math mode. Inline vs environments
+Equations are written in a special ``math mode'' In math mode, there are extra commands that work to produce mathematical symbols, for instance \begin{verbatim}$\alpha$\end{verbatim} will produce $\alpha$, or whatever combinations your heart desires. Notice the {\$} are used to encase something to be used inline. If you want to have something on a separate line, and numbered, you should use the command {\tt \tbs begin\{equation\}} and end it similarily. 
 \begin{itemize}
 \item \tbs{}usepackage\{amsmath\}
 \item \tbs{}usepackage\{amssymb\}
-\item superscript / subscript
+\item To get a superscript, just use ``{\^{}}'', and for subscript use ``{\_{}}''. Note that if there is only one character or command in the super(sub)script, than there is no need to use brackets, but if you want multiple characters to be super(sub)scripted, you have to encase them in curly-brackets. e.g. $10^{10^{100}}$ which is produced by \begin{verbatim}$10^{10^{100}}$\end{verbatim}
 \item \tbs{}sqrt
 \item \tbs{}int
 \item special sequences \\sin
@@ -167,6 +167,9 @@ Use \%
 
 \subsection{How to deal with errors}
 Fix them.
+
+\subsection{Quotations}
+Note that quotations in LaTeX should be done with two uses of the ```'' key for left hand side and two uses of the ``''' key of the right hand side. This is because you might be used to working with ``smart quotes'' in which left and right quotations marks are done automatically for you, but in LaTeX you have to use separate marks for each quotation. (Note: In a good editor, for instance like EMACS, using the quotation key will automatically produce the correct kind if you are in LaTeX-Mode)
 
 \subsection{Well wishes}
 There's a lot to learn; don't be discouraged! You only need to remember a very small subset of everything in order to produce beautiful documents. Keep templates of useful document classes, look things up (@ Google ``{\tt{}How do I do} X {\tt{}in LaTeX}''), and ask questions when necessary. Learning to write with \LaTeX\ is learning use a new skill. Keep at it and you'll be an expert in no time!

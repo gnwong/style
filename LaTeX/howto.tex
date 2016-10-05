@@ -135,10 +135,11 @@ Equations are written in a special ``math mode'' In math mode, there are extra c
 \item \tbs{}usepackage\{amsmath\}
 \item \tbs{}usepackage\{amssymb\}
 \item To get a superscript, just use ``{\^{}}'', and for subscript use ``{\_{}}''. Note that if there is only one character or command in the super(sub)script, than there is no need to use brackets, but if you want multiple characters to be super(sub)scripted, you have to encase them in curly-brackets. e.g. $10^{10^{100}}$ which is produced by \begin{verbatim}$10^{10^{100}}$\end{verbatim}
-\item \tbs{}sqrt
-\item \tbs{}int
-\item special sequences \\sin
+\item \tbs{}sqrt $\sqrt{1+x^2}$
+\item \tbs{}int $\int_0^\infty \mathrm{e}^{\frac{-x^2}{2}} \mathrm{d}x$ Note also ``iint'' and ``iiint'' provide double and triple integrals respectively.
+\item special sequences \\sin You shouldn't write out ``sin'' or etc., instead you should use the provided functions \tbs sin\{\ldots\} and same for other common functions such as exp, log, or whatever.
 \item fractions (frac and dfrac)
+\item \tbs{}left and \tbs{right} If you want to make sure that your parenthesis are scaled appropriately to whatever sized math is encased in them, use \tbs left( and \tbs right). For an example, see $(\dfrac{\sum_{n=0}^{100} \frac{1}{n^2}}{2})$ versus $\left(\dfrac{\sum_{n=0}^{100} \frac{1}{n^2}}{2}\right)$
 \item \tbs{}mathrm 
 \item \tbs{}mathbb
 \item \tbs{}mathcal

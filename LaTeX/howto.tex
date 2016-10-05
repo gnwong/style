@@ -5,9 +5,12 @@
 \usepackage{float}
 \usepackage{amssymb}
 %\usepackage{textgreek}
+\usepackage{ulem}
+\usepackage{tikz}
 \usepackage{ marvosym }
 \usepackage{ scrextend }
 \usepackage{ setspace }
+
 
 %\usepackage{showframe}
 
@@ -128,20 +131,39 @@ Fill extra horizontal space & {\tt \tbs{}hfill}
 
 You've noticed by now that commands seem to be preceded by the backslash {\tt \tbs} character. The backslash is called an \emph{escape} character. Using it lets the compiler know that it should treat the following characters a part of a command as opposed to normal text. 
 
+\section{Labels}
+Labels allow you to reference parts of the document (such as images / equations) by number without requiring you to keep a list yourself.
+[TODO]
+
 
 \section{Math mode}
 Equations are written in a special ``math mode'' In math mode, there are extra commands that work to produce mathematical symbols, for instance \begin{verbatim}$\alpha$\end{verbatim} will produce $\alpha$, or whatever combinations your heart desires. Notice the {\$} are used to encase something to be used inline. If you want to have something on a separate line, and numbered, you should use the command {\tt \tbs begin\{equation\}} and end it similarily. 
 \begin{itemize}
 \item \tbs{}usepackage\{amsmath\}
+
 \item \tbs{}usepackage\{amssymb\}
-\item To get a superscript, just use ``{\^{}}'', and for subscript use ``{\_{}}''. Note that if there is only one character or command in the super(sub)script, than there is no need to use brackets, but if you want multiple characters to be super(sub)scripted, you have to encase them in curly-brackets. e.g. $10^{10^{100}}$ which is produced by \begin{verbatim}$10^{10^{100}}$\end{verbatim}
+
+\item To get a superscript, use a carot ``{\tt \^{}}'', and for subscript use an underscore ``{\tt \_{}}''. Note that if there is only one character or command in the super(sub)script, than there is no need to use brackets, but if you want multiple characters to be super(sub)scripted, you have to encase them in curly-brackets. e.g. $10^{10^{100}}$ which is produced by \begin{verbatim}$10^{10^{100}}$\end{verbatim}
+
 \item \tbs{}sqrt $\sqrt{1+x^2}$
-\item \tbs{}int $\int_0^\infty \mathrm{e}^{\frac{-x^2}{2}} \mathrm{d}x$ Note also ``iint'' and ``iiint'' provide double and triple integrals respectively.
-\item special sequences \\sin You shouldn't write out ``sin'' or etc., instead you should use the provided functions \tbs sin\{\ldots\} and same for other common functions such as exp, log, or whatever.
-\item fractions (frac and dfrac)
+
+\item \tbs{}int $\int_0^\infty \mathrm{e}^{\frac{-x^2}{2}} \mathrm{d}x$ Note also {\tt \tbs iint} and {\tt \tbs iiint} provide double and triple integrals respectively.
+
+\item special sequences \\sin You shouldn't write out ``sin'' or etc., instead you should use the provided functions {\tt \tbs sin\{\ldots\}} and same for other common functions such as exp, log, or whatever.
+
+\item Styling fractions as $x$ over $y$ can be done with the {\tt \tbs frac} and {\tt \tbs dfrac} commands. The form of each command is {\tt \tbs frac\{x\}\{y\}} where {\tt x} is what you want to appear in the numerator and {\tt y} is what you want to appear in the denominator.
+
+The latter of the two, {\tt \tbs dfrac} puts the renderer into \textbf{display} mode, which generally expands the fraction, making the text larger. Compare 
+
+$\frac{x}{y}$ vs $\dfrac{x}{y}$
+
+The version on the left uses the {\tt \tbs frac} command; the version on the right uses {\tt \tbs dfrac}.
 \item \tbs{}left and \tbs{right} If you want to make sure that your parenthesis are scaled appropriately to whatever sized math is encased in them, use \tbs left( and \tbs right). For an example, see $(\dfrac{\sum_{n=0}^{100} \frac{1}{n^2}}{2})$ versus $\left(\dfrac{\sum_{n=0}^{100} \frac{1}{n^2}}{2}\right)$
+
 \item \tbs{}mathrm 
+
 \item \tbs{}mathbb
+
 \item \tbs{}mathcal
 \item putting spaces in math mode
 \item  - align
@@ -155,11 +177,75 @@ Detexify {\tt http://detexify.kirelabs.org/}
 \section{Lists}
 
 \section{Floats}
+Floats are a special type of environment that indicates to the renderer that the contained elements should all be displayed on one page. They should be used for things like tables and plots, which often include titles and captions that should not be spread over multiple pages.
+
+Because floats may not be able to be placed exactly where they appear in the source without breaking the flow of the document, they accept a \textbf{positioning} argument, which is one of {\tt h,t,b,p}, indicating \textbf{\underline{h}ere}, \textbf{\underline{t}op of page}, \textbf{\underline{b}ottom of page}, and \textbf{special \underline{p}age for floats}, respectively. If you include the {\tt float} package, you can also use the capital {\tt H} specifier which overrides all of the renderer's sensibilities and places the figure \textbf{right \underline{H}ere}. 
+
+A bit confusingly, floats are actually named {\tt figure} in the source. Like any other section, they begin and end as
+
+\begin{verbatim}
+\begin{figure}[h]
+    ... your source here
+\end{figure}
+\end{verbatim}
+
 
 \subsection{Tables}
 
 \subsection{Graphics}
- - tikzpicture
+\LaTeX\ offers several options for adding graphics to your document. 
+
+The first (and easiest) is to simply include an image file, like a {\tt bmp} or {\tt png}. This can be done using the {\tt \tbs includegraphics} command, formatted as 
+
+{\tt \tbs includegraphics[args]\{filename\} }
+
+The {\tt args} arguments can be used to set properties like the {\tt height=40mm} or {\tt width=60mm} of the image.
+
+As noted above, graphics you include should probably be within the {\tt float} environment. You can mandate {\tt centering} and add {\tt label}s and {\tt caption}s to the object too, as per
+
+\begin{verbatim}
+\begin{figure}
+  \centering
+  \includegraphics[height=35mm]{latex_is_cool.png}
+  \caption{\LaTeX is cool!}
+  \label{fig:latexiscool}
+\end{figure}
+\end{verbatim}
+
+The second option for including an image is to draw it within a {\tt tikzpicture} environment. For now, the exact mechanics of using {\tt tikzpicture} is beyond the scope of this document, but see the following example for inspiration
+
+\begin{verbatim}
+\begin{tikzpicture}
+\draw [black] (0,0) circle(2);
+\draw [black] (1.4,0) ellipse(0.2 and 1.4);
+\draw [loosely dashed] (0,0) -- (3.4,0);
+\filldraw[black] (0,0) circle (2pt);
+\draw [densely dotted] (0,0) -- (1.4, 1.42);
+\draw (0.5, 0.65) node[anchor=south] {$r$};
+\draw [densely dotted, ->, xscale=0.18] (15,-0.35) arc (-20:240:1);
+\draw (2.5,1) node[anchor=south] {$\phi$};
+\draw [densely dotted, ->] (1,0) arc (0:45:1);
+\draw (0.9, 0.27) node[anchor=east] {$\theta$};
+\end{tikzpicture}
+\end{verbatim}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\draw [black] (0,0) circle(2);
+\draw [black] (1.4,0) ellipse(0.2 and 1.4);
+\draw [loosely dashed] (0,0) -- (3.4,0);
+\filldraw[black] (0,0) circle (2pt);
+\draw [densely dotted] (0,0) -- (1.4, 1.42);
+\draw (0.5, 0.65) node[anchor=south] {$r$};
+\draw [densely dotted, ->, xscale=0.18] (15,-0.35) arc (-20:240:1);
+\draw (2.5,1) node[anchor=south] {$\phi$};
+\draw [densely dotted, ->] (1,0) arc (0:45:1);
+\draw (0.9, 0.27) node[anchor=east] {$\theta$};
+\end{tikzpicture}
+\caption{A {\tt tikz} picture!}
+\end{figure}
+
  
 \section{Miscellaneous}
 
@@ -170,7 +256,9 @@ Use \%
 Fix them.
 
 \subsection{Quotations}
-Note that quotations in LaTeX should be done with two uses of the ```'' key for left hand side and two uses of the ``''' key of the right hand side. This is because you might be used to working with ``smart quotes'' in which left and right quotations marks are done automatically for you, but in LaTeX you have to use separate marks for each quotation. (Note: In a good editor, for instance like EMACS, using the quotation key will automatically produce the correct kind if you are in LaTeX-Mode)
+Note that quotations in LaTeX should be done with two uses of the ```'' key for left hand side and two uses of the ``''' key of the right hand side. This is because you might be used to working with ``smart quotes'' in which left and right quotations marks are done automatically for you, but in LaTeX you have to use separate marks for each quotation. (Note: In a good editor, for instance like {\tt EMACS}, using the quotation key will automatically produce the correct kind if you are in LaTeX-Mode.)
+
+%(Note: In a good editor, for instance like \sout{{\tt EMACS}} a properly-formatted {\tt vim}, using the quotation key will automatically produce the correct kind if you are in LaTeX-Mode)
 
 \subsection{Well wishes}
 There's a lot to learn; don't be discouraged! You only need to remember a very small subset of everything in order to produce beautiful documents. Keep templates of useful document classes, look things up (@ Google ``{\tt{}How do I do} X {\tt{}in LaTeX}''), and ask questions when necessary. Learning to write with \LaTeX\ is learning use a new skill. Keep at it and you'll be an expert in no time!
